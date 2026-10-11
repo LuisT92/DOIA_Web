@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets';
+import doctor from '../assets/doctor.jpg';
+import JointKnee from './icons/JointKnee.astro';
+import JointShoulder from './icons/JointShoulder.astro';
+import JointHip from './icons/JointHip.astro';
+import JointAnkle from './icons/JointAnkle.astro';
+---
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="rule"></div>
+      <h1>Dr. Daniel<br>Ibarra Alva</h1>
+      <p class="role">Traumatología y Ortopedia</p>
+      <p class="slogan">Tu movilidad,<br>mi prioridad</p>
+      <a href="#agendar" class="btn">Agenda tu cita</a>
+    </div>
+    <div class="hero-visual">
+      <Image class="hero-photo" src={doctor} alt="Dr. Daniel Ibarra Alva" widths={[480, 800, 1200]} sizes="(max-width: 860px) 100vw, 50vw" loading="eager" />
+      <ul class="pillars">
+        <li tabindex="0">Prevención</li>
+        <li tabindex="0">Diagnóstico</li>
+        <li tabindex="0">Tratamiento</li>
+        <li tabindex="0">Rehabilitación</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="joints" aria-label="Articulaciones que tratamos">
+  <div class="joint">
+    <JointKnee />
+    <span>Rodilla</span>
+  </div>
+  <div class="joint">
+    <JointShoulder />
+    <span>Hombro</span>
+  </div>
+  <div class="joint">
+    <JointHip />
+    <span>Cadera</span>
+  </div>
+  <div class="joint">
+    <JointAnkle />
+    <span>Tobillo</span>
+  </div>
+</div>
+
+<style>
+  .hero { position: relative; background: var(--white); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; min-height: 480px; }
+  .hero-text { padding: 4.5rem 1.5rem 4.5rem max(1.5rem, calc((100vw - 1160px) / 2 + 1.5rem)); position: relative; z-index: 2; }
+  .rule { width: 80px; height: 2px; background: var(--navy); margin-bottom: 1.75rem; }
+  .hero-text h1 { font-size: clamp(2.4rem, 5vw, 3.9rem); line-height: 1.05; font-weight: 700; letter-spacing: -0.02em; }
+  .hero-text .role { margin-top: 1.25rem; font-size: 0.8rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--slate); font-weight: 600; }
+  .hero-text .slogan { margin-top: 1.75rem; font-size: 1.2rem; font-weight: 300; color: var(--slate); line-height: 1.35; }
+  .hero-text .btn { margin-top: 2rem; }
+
+  .hero-visual {
+    position: relative;
+    background: radial-gradient(circle at 35% 30%, #3b6a99 0%, var(--navy-mid) 35%, var(--navy-deep) 100%);
+    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+    display: flex; justify-content: flex-end; align-items: center;
+  }
+  .hero-visual::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 25%, rgba(255,255,255,0.35) 0 3px, transparent 4px),
+      radial-gradient(ellipse at 30% 25%, rgba(255,255,255,0.14), transparent 55%);
+  }
+  .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .pillars {
+    position: relative; z-index: 2;
+    padding: 2rem 2.5rem; list-style: none; color: var(--white);
+    background: linear-gradient(90deg, transparent, rgba(15, 27, 45, 0.85) 40%);
+    align-self: stretch; display: flex; flex-direction: column; justify-content: center; gap: 0.65rem;
+    min-width: 240px; padding-left: 4rem;
+  }
+  .pillars li {
+    position: relative; display: flex; align-items: center; gap: 0; cursor: default;
+    font-weight: 500; font-size: 1.05rem; letter-spacing: 0.03em; color: rgba(255,255,255,0.85);
+    padding: 0.2rem 0;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), color 0.25s, letter-spacing 0.35s, gap 0.35s, text-shadow 0.35s;
+  }
+  .pillars li::before {
+    content: ""; height: 2px; width: 0; background: #4da3ff; border-radius: 2px;
+    transition: width 0.35s cubic-bezier(.2,.8,.2,1);
+  }
+  .pillars li:hover, .pillars li:focus-visible {
+    transform: translateX(10px); color: var(--white); letter-spacing: 0.07em; gap: 0.6rem;
+    text-shadow: 0 0 18px rgba(77, 163, 255, 0.55);
+  }
+  .pillars li:hover::before, .pillars li:focus-visible::before { width: 26px; }
+  @media (prefers-reduced-motion: reduce) { .pillars li, .pillars li::before { transition: none; } }
+  .pillars::after { content: ""; width: 34px; height: 2px; background: var(--white); margin-top: 0.75rem; }
+
+  .joints { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; background: var(--white); padding: 3px; }
+  .joint {
+    position: relative; height: 210px; overflow: hidden; color: var(--white);
+    background:
+      radial-gradient(circle at 50% 48%, rgba(245,158,66,0.9) 0, rgba(245,158,66,0.35) 14%, transparent 34%),
+      radial-gradient(circle at 50% 40%, #2c4a6b 0%, var(--navy-deep) 75%);
+    display: flex; align-items: flex-end; justify-content: center; padding-bottom: 1rem;
+    transition: transform 0.4s;
+  }
+  .joint :global(svg) { position: absolute; inset: 0; margin: auto; width: 46%; height: 62%; opacity: 0.55; transition: opacity 0.3s, transform 0.4s; }
+  .joint:hover :global(svg) { opacity: 0.85; transform: scale(1.06); }
+  .joint span { position: relative; font-size: 0.72rem; letter-spacing: 0.35em; font-weight: 600; text-transform: uppercase; }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-text { padding: 3rem 1.5rem; }
+    .hero-visual { clip-path: none; min-height: 280px; justify-content: center; }
+    .pillars { background: rgba(15, 27, 45, 0.6); align-items: center; padding: 2rem; }
+    .joints { grid-template-columns: repeat(2, 1fr); }
+    .joint { height: 170px; }
+  }
+</style>

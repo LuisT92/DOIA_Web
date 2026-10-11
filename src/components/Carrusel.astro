@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import l1 from '../assets/carrusel/lamina-1.png';
+import l2 from '../assets/carrusel/lamina-2.png';
+import l3 from '../assets/carrusel/lamina-3.png';
+import l4 from '../assets/carrusel/lamina-4.png';
+import l5 from '../assets/carrusel/lamina-5.png';
+import l6 from '../assets/carrusel/lamina-6.png';
+import l7 from '../assets/carrusel/lamina-7.png';
+
+const laminas = [
+  { src: l1, alt: 'Dr. Daniel Ibarra Alva: experiencia, tecnología y trato humano en cada paso de tu recuperación' },
+  { src: l2, alt: 'Dolor de hombro: no lo ignores, tiene solución' },
+  { src: l3, alt: '¿Te truena la rodilla? No siempre significa desgaste' },
+  { src: l4, alt: '¿Cuándo un dolor de rodilla necesita valoración por un ortopedista?' },
+  { src: l5, alt: 'Caso clínico: desgarro meniscal' },
+  { src: l6, alt: '¿Te fracturaste? No todas las fracturas necesitan cirugía, pero algunas sí' },
+  { src: l7, alt: '¿Dolor en la rodilla que no mejora? No es normal, no te acostumbres' },
+];
+---
+<section class="section carrusel" aria-roledescription="carrusel" aria-label="Información para tu salud">
+  <div class="wrap">
+    <div class="eyebrow">Información para tu salud</div>
+  </div>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      {[0, 1].map((copy) => (
+        <div class="marquee-set" aria-hidden={copy === 1 ? 'true' : undefined}>
+          {laminas.map((l) => (
+            <figure class="slide">
+              <button type="button" class="open" tabindex={copy === 1 ? -1 : undefined} aria-label={copy === 0 ? `Ampliar: ${l.alt}` : undefined}>
+                <Image src={l.src} alt={copy === 0 ? l.alt : ''} width={l.src.width} height={l.src.height} loading="lazy" />
+              </button>
+            </figure>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <dialog class="lightbox">
+    <button type="button" class="close" aria-label="Cerrar">×</button>
+    <img alt="" />
+  </dialog>
+</section>
+
+<style>
+  .carrusel { padding-bottom: 5.5rem; }
+  .marquee {
+    overflow: hidden; padding: 1rem 0 1.5rem;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .marquee-track { display: flex; width: max-content; animation: marquee 50s linear infinite; }
+  .marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+  .marquee-set { display: flex; flex: none; }
+  .slide { flex: none; height: 400px; margin-right: 1.25rem; border-radius: 0.9rem; overflow: hidden; background: var(--white); box-shadow: var(--shadow); transition: transform 0.35s, box-shadow 0.35s; }
+  .slide:hover { transform: translateY(-6px); box-shadow: 0 22px 40px -16px rgba(15, 27, 45, 0.45); }
+  .open { display: block; height: 100%; border: 0; padding: 0; background: none; cursor: zoom-in; }
+  .open :global(img) { display: block; height: 100%; width: auto; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  .lightbox { border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 94vh; margin: auto; overflow: visible; }
+  .lightbox::backdrop { background: rgba(15, 27, 45, 0.88); backdrop-filter: blur(4px); }
+  .lightbox :global(img) { display: block; max-width: 94vw; max-height: 90vh; border-radius: 0.75rem; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+  .close { position: absolute; top: -14px; right: -14px; width: 38px; height: 38px; border-radius: 50%; border: 0; cursor: pointer; background: var(--white); color: var(--navy); font-size: 1.5rem; line-height: 1; box-shadow: var(--shadow); }
+
+  @media (max-width: 860px) {
+    .slide { height: 320px; }
+    .marquee-track { animation-duration: 40s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    .marquee { overflow-x: auto; }
+    .marquee-set[aria-hidden] { display: none; }
+  }
+</style>
+
+<script>
+  const root = document.querySelector('.carrusel') as HTMLElement;
+  const dialog = root.querySelector('dialog') as HTMLDialogElement;
+  const dialogImg = dialog.querySelector('img') as HTMLImageElement;
+
+  root.querySelectorAll<HTMLElement>('.slide').forEach((s) => s.querySelector('.open')?.addEventListener('click', () => {
+    const img = s.querySelector('img') as HTMLImageElement;
+    dialogImg.src = img.currentSrc || img.src;
+    dialogImg.alt = img.alt;
+    dialog.showModal();
+  }));
+  dialog.addEventListener('click', (e) => { if (e.target !== dialogImg) dialog.close(); });
+  dialog.querySelector('.close')?.addEventListener('click', () => dialog.close());
+</script>

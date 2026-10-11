@@ -1,0 +1,60 @@
+<section class="section acerca">
+  <div class="wrap">
+    <div class="eyebrow">Sobre el doctor</div>
+    <div class="acerca-grid">
+      <div class="acerca-text">
+        <p class="lead">
+          Cirujano Ortopedista y Traumatólogo especializado en lesiones deportivas, artroscopia y reemplazo articular.
+        </p>
+        <p>
+          Atención de dolor de rodilla, hombro y cadera, lesiones de menisco, ligamento cruzado anterior, fracturas y secuelas de fracturas. Experiencia en artroscopia de rodilla y hombro, prótesis total de rodilla y cadera.
+        </p>
+        <p>
+          Consulta en Hospital Ángeles Lindavista, con atención personalizada y enfoque en la recuperación funcional.
+        </p>
+        <ul class="tags">
+          <li>Lesiones deportivas</li>
+          <li>Artroscopia</li>
+          <li>Reemplazo articular</li>
+          <li>Prótesis de rodilla y cadera</li>
+        </ul>
+      </div>
+
+      <aside class="urgencias">
+        <h3>Valoración de urgencias traumatológicas y fracturas</h3>
+        <ul>
+          <li>Fracturas</li>
+          <li>Luxaciones</li>
+          <li>Esguinces</li>
+          <li>Lesiones ligamentarias</li>
+        </ul>
+        <a href="#agendar" class="btn-light">Agenda tu valoración</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .acerca-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: stretch; }
+  .acerca-text p { color: var(--slate); font-size: 0.98rem; line-height: 1.75; margin-bottom: 1.1rem; }
+  .acerca-text .lead { font-size: 1.25rem; font-weight: 600; color: var(--navy); line-height: 1.5; padding-left: 1.1rem; border-left: 3px solid var(--navy); }
+  .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+  .tags li { padding: 0.45rem 1rem; border-radius: 2rem; background: var(--panel); color: var(--navy-mid); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.03em; transition: background 0.25s, color 0.25s, transform 0.25s; }
+  .tags li:hover { background: var(--navy); color: var(--white); transform: translateY(-2px); }
+
+  .urgencias {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--white);
+    border-radius: 1.25rem; padding: 2.25rem; box-shadow: var(--shadow);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%);
+  }
+  .urgencias h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.4; padding-bottom: 1.1rem; margin-bottom: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.18); }
+  .urgencias ul { list-style: none; display: grid; gap: 0.7rem; margin-bottom: 1.6rem; }
+  .urgencias li { display: flex; align-items: center; gap: 0.7rem; font-size: 0.92rem; color: #dbe5f1; }
+  .urgencias li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #4da3ff; flex: none; }
+  .btn-light { display: inline-block; background: var(--white); color: var(--navy); padding: 0.7rem 1.4rem; border-radius: 0.5rem; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em; transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-light:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.3); }
+
+  @media (max-width: 860px) {
+    .acerca-grid { grid-template-columns: 1fr; }
+  }
+</style>

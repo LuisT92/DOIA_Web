@@ -1,0 +1,92 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Dr. Daniel Ibarra Alva | Traumatología y Ortopedia',
+  description = 'Dr. Daniel Ibarra Alva, especialista en traumatología y ortopedia en Hospital Ángeles Lindavista, CDMX. Cirugía de rodilla, hombro, cadera, tobillo y pie. Agenda tu cita.',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const ogImage = new URL('/og-image.jpg', Astro.site ?? Astro.url);
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" />
+  <!-- ANALYTICS: pega aquí el código de Google Analytics (GA4) y/o Meta Pixel -->
+  <!-- Ejemplo GA4: <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+  <!-- Ejemplo Meta Pixel: <script is:inline>/* código del píxel */</script> -->
+  <meta name="generator" content={Astro.generator} />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#1b2a41" />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <slot />
+</body>
+</html>
+
+<style is:global>
+  :root {
+    --navy: #1b2a41;
+    --navy-deep: #0f1b2d;
+    --navy-mid: #24405f;
+    --slate: #4b5b70;
+    --muted: #6b7a8d;
+    --line: #dfe5ec;
+    --bg: #f4f7fb;
+    --panel: #e9eef5;
+    --white: #ffffff;
+    --glow: #f59e42;
+    --whatsapp: #25d366;
+    --shadow: 0 12px 30px -12px rgba(15, 27, 45, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    line-height: 1.6;
+  }
+
+  svg { display: block; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--navy); color: var(--white);
+    padding: 0.7rem 1.4rem; text-decoration: none;
+    font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+    padding-right: 2rem;
+    transition: background 0.25s;
+  }
+  .btn:hover { background: var(--navy-mid); }
+
+  .section { padding: 4.5rem 0; }
+  .eyebrow { display: flex; align-items: center; gap: 1rem; font-size: 0.9rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--slate); font-weight: 600; margin-bottom: 2.5rem; }
+  .eyebrow::before { content: ""; width: 48px; height: 2px; background: var(--navy); }
+</style>

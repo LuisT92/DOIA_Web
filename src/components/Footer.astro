@@ -1,0 +1,125 @@
+---
+import { Image } from 'astro:assets';
+import metlife from '../assets/seguros/metlife.png';
+import latino from '../assets/seguros/latino.png';
+import allianz from '../assets/seguros/allianz.png';
+import atlas from '../assets/seguros/atlas.png';
+import planSeguro from '../assets/seguros/plan-seguro.png';
+import IconHospital from './icons/IconHospital.astro';
+import IconWhatsapp from './icons/IconWhatsapp.astro';
+import IconPin from './icons/IconPin.astro';
+import IconRunner from './icons/IconRunner.astro';
+
+const logos = [
+  { name: 'MetLife', src: metlife },
+  { name: 'Latino Seguros', src: latino },
+  { name: 'Plan Seguro', src: planSeguro },
+  { name: 'Allianz', src: allianz },
+  { name: 'Seguros Atlas', src: atlas },
+];
+---
+<section class="info">
+  <div class="wrap">
+    <div class="info-grid">
+      <div class="hospital">
+        <IconHospital />
+        <div>
+          <strong>Hospital Ángeles Lindavista</strong>
+          <small>Consultorio 315<br><a href="https://maps.google.com/?q=Hospital+Angeles+Lindavista+Consultorio+315" target="_blank" rel="noopener">Rio Bamba 639, Lindavista,<br>Gustavo A. Madero, CDMX</a></small>
+        </div>
+      </div>
+      <div class="insurers">
+        <h4>Aceptamos seguros de gastos médicos</h4>
+        <div class="marquee" role="list" aria-label="Aseguradoras aceptadas">
+          <div class="marquee-track">
+            {[0, 1].map((copy) => (
+              <div class="marquee-set" aria-hidden={copy === 1 ? 'true' : undefined}>
+                {logos.map((l) => (
+                  <div class="logo" role={copy === 0 ? 'listitem' : undefined}>
+                    {l.src ? <Image src={l.src} alt={copy === 0 ? l.name : ''} loading="lazy" widths={[160, 320]} sizes="160px" /> : <span class="logo-text">{l.name}</span>}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-bar">
+      <div class="contact-left">
+        <a class="wa" href="https://wa.me/525561555254" target="_blank" rel="noopener">
+          <span class="dot"><IconWhatsapp /></span>
+          <span><small>Agenda tu cita</small><strong>55 6155 5254</strong></span>
+        </a>
+        <div class="loc">
+          <IconPin />
+          <span><strong>Ubicación</strong>Lindavista, CDMX<br>(Hospital Ángeles)</span>
+        </div>
+      </div>
+      <div class="contact-right">
+        <IconRunner />
+        <span>Especialista<br>en movimiento</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Dr. Daniel Ibarra Alva · Traumatología y Ortopedia · Ced. 11106113 · Ced. 14915067</footer>
+
+<style>
+  .info { background: var(--white); border-top: 1px solid var(--line); padding: 2.5rem 0 0; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 2rem; align-items: center; }
+  .hospital {
+    background: var(--navy); color: var(--white); padding: 1.6rem 3rem 1.6rem 1.75rem;
+    display: flex; gap: 1.1rem; align-items: center;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 28px) 100%, 0 100%);
+  }
+  .hospital :global(svg) { flex: none; width: 44px; height: 44px; }
+  .hospital strong { display: block; font-size: 0.95rem; }
+  .hospital small { display: block; font-size: 0.78rem; color: #c3d0e0; line-height: 1.5; margin-top: 0.15rem; }
+  .hospital small a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .hospital small a:hover { color: var(--white); text-decoration: underline; }
+  .insurers h4 { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); margin-bottom: 0.8rem; }
+  .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .marquee-track { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-set { display: flex; flex: none; }
+  .logo { flex: none; width: 140px; height: 64px; margin-right: 0.8rem; padding: 0.6rem 0.9rem; display: block; background: var(--white); border: 1px solid var(--line); border-radius: 0.75rem; transition: box-shadow 0.25s, transform 0.25s; }
+  .logo:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .logo :global(img) { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .logo-text { display: flex; height: 100%; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 800; color: var(--navy-mid); letter-spacing: 0.02em; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    .marquee { overflow-x: auto; }
+    .marquee-set[aria-hidden] { display: none; }
+  }
+
+  .contact-bar { display: grid; grid-template-columns: 1.4fr 1fr; margin-top: 2.5rem; align-items: stretch; }
+  .contact-left { display: flex; align-items: center; gap: 1.6rem; padding: 1.5rem 0 1.75rem; flex-wrap: wrap; }
+  .wa { display: flex; align-items: center; gap: 0.9rem; text-decoration: none; color: var(--navy); }
+  .wa .dot { width: 56px; height: 56px; border-radius: 50%; background: var(--whatsapp); display: grid; place-items: center; box-shadow: 0 8px 18px -6px rgba(37, 211, 102, 0.7); transition: transform 0.2s; }
+  .wa:hover .dot { transform: scale(1.07); }
+  .wa .dot :global(svg) { width: 30px; height: 30px; color: var(--white); }
+  .wa small { display: block; font-size: 0.72rem; font-weight: 600; color: var(--slate); }
+  .wa strong { font-size: 1.7rem; font-weight: 700; letter-spacing: 0.02em; line-height: 1.1; }
+  .loc { display: flex; gap: 0.7rem; align-items: center; padding-left: 1.6rem; border-left: 1px solid var(--line); font-size: 0.78rem; color: var(--slate); }
+  .loc :global(svg) { width: 26px; height: 26px; color: var(--navy); flex: none; }
+  .loc strong { display: block; color: var(--navy); font-size: 0.85rem; }
+  .contact-right {
+    background: var(--navy); color: var(--white); display: flex; align-items: center; justify-content: center; gap: 1rem;
+    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%); padding: 1.5rem 2rem 1.5rem 3rem;
+    font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: #c3d0e0;
+  }
+  .contact-right :global(svg) { width: 64px; height: 64px; color: var(--white); opacity: 0.85; }
+
+  footer { background: var(--navy-deep); color: #8fa1b6; text-align: center; font-size: 0.75rem; padding: 1rem; }
+
+  @media (max-width: 860px) {
+    .info-grid, .contact-bar { grid-template-columns: 1fr; }
+    .loc { border-left: 0; padding-left: 0; }
+    .contact-right { clip-path: none; padding: 1.5rem; }
+    .hospital { padding-right: 2rem; clip-path: none; border-radius: 0.5rem; }
+  }
+</style>

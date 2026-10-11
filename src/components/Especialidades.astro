@@ -1,0 +1,80 @@
+---
+import SpecKnee from './icons/SpecKnee.astro';
+import SpecShoulder from './icons/SpecShoulder.astro';
+import SpecHip from './icons/SpecHip.astro';
+import SpecFoot from './icons/SpecFoot.astro';
+import SpecBone from './icons/SpecBone.astro';
+import IconShield from './icons/IconShield.astro';
+import IconUser from './icons/IconUser.astro';
+import IconScalpel from './icons/IconScalpel.astro';
+---
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow">Especialista en</div>
+    <div class="spec-grid">
+      <div class="spec-list">
+        <div class="spec">
+          <div class="icon-circle"><SpecKnee /></div>
+          <div><h3>Cirugía de rodilla</h3><p>Lesiones de menisco, ligamento cruzado, artroscopia y reemplazo articular.</p></div>
+        </div>
+        <div class="spec">
+          <div class="icon-circle"><SpecShoulder /></div>
+          <div><h3>Cirugía de hombro</h3><p>Lesiones de manguito rotador, inestabilidad, artroscopia y prótesis.</p></div>
+        </div>
+        <div class="spec">
+          <div class="icon-circle"><SpecHip /></div>
+          <div><h3>Cirugía de cadera</h3><p>Dolor, artrosis y reemplazo articular.</p></div>
+        </div>
+        <div class="spec">
+          <div class="icon-circle"><SpecFoot /></div>
+          <div><h3>Cirugía de tobillo y pie</h3><p>Esguinces, fracturas, inestabilidad y artroscopia.</p></div>
+        </div>
+        <div class="spec">
+          <div class="icon-circle"><SpecBone /></div>
+          <div><h3>Trauma y fracturas</h3><p>Manejo integral de fracturas en adultos y niños.</p></div>
+        </div>
+      </div>
+
+      <aside class="features">
+        <div class="feature">
+          <div class="ring"><IconShield /></div>
+          <span>Amplia experiencia en cirugía ortopédica y traumatología</span>
+        </div>
+        <div class="feature">
+          <div class="ring"><IconUser /></div>
+          <span>Atención personalizada y humana</span>
+        </div>
+        <div class="feature">
+          <div class="ring"><IconScalpel /></div>
+          <span>Técnicas modernas y de mínima invasión</span>
+        </div>
+        <div class="quote">Recupera tu movilidad y vuelve a lo que te gusta</div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .spec-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 3rem; align-items: start; }
+  .spec-list { display: flex; flex-direction: column; gap: 1.6rem; }
+  .spec { display: flex; gap: 1.1rem; align-items: center; }
+  .icon-circle {
+    flex: none; width: 58px; height: 58px; border-radius: 50%;
+    background: var(--navy); color: var(--white);
+    display: grid; place-items: center; box-shadow: var(--shadow);
+  }
+  .icon-circle :global(svg) { width: 28px; height: 28px; }
+  .spec h3 { font-size: 0.95rem; font-weight: 700; }
+  .spec p { font-size: 0.85rem; color: var(--muted); line-height: 1.45; margin-top: 0.15rem; }
+
+  .features { background: var(--panel); border-radius: 1.25rem; padding: 2.25rem; box-shadow: var(--shadow); }
+  .feature { display: flex; gap: 1.1rem; align-items: center; padding: 0.9rem 0; font-size: 0.92rem; color: var(--slate); font-weight: 500; }
+  .feature .ring { flex: none; width: 54px; height: 54px; border: 1.5px solid var(--slate); border-radius: 50%; display: grid; place-items: center; color: var(--navy); background: var(--white); }
+  .feature .ring :global(svg) { width: 26px; height: 26px; }
+  .quote { margin-top: 1.25rem; padding-top: 1.75rem; border-top: 1px solid #c9d3df; text-align: center; font-family: 'Caveat', cursive; font-size: 1.9rem; line-height: 1.15; color: var(--navy); }
+  .quote::after { content: ""; display: block; width: 70%; height: 3px; background: var(--navy); border-radius: 3px; margin: 0.6rem auto 0; transform: rotate(-2deg); }
+
+  @media (max-width: 860px) {
+    .spec-grid { grid-template-columns: 1fr; }
+  }
+</style>
