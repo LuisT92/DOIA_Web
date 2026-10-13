@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const formacion = [
+  { titulo: 'Título de la formación', lugar: 'Institución', periodo: 'Año' },
+  { titulo: 'Título de la formación', lugar: 'Institución', periodo: 'Año' },
+];
+
+const cursos = [
+  { titulo: 'Nombre del curso o congreso', lugar: 'Institución u organizador', periodo: 'Año', url: '' },
+  { titulo: 'Nombre del curso o congreso', lugar: 'Institución u organizador', periodo: 'Año', url: '' },
+];
+
+const articulos = [
+  { titulo: 'Título del artículo', lugar: 'Revista o publicación', periodo: 'Año', url: '' },
+  { titulo: 'Título del artículo', lugar: 'Revista o publicación', periodo: 'Año', url: '' },
+];
+
+const secciones = [
+  { id: 'formacion', titulo: 'Formación académica', items: formacion },
+  { id: 'cursos', titulo: 'Cursos y congresos', items: cursos },
+  { id: 'articulos', titulo: 'Artículos y publicaciones', items: articulos },
+];
+---
+<Layout
+  title="Acerca del Dr. Daniel Ibarra Alva | Formación, cursos y publicaciones"
+  description="Conoce la formación, los cursos y los artículos del Dr. Daniel Ibarra Alva, especialista en traumatología y ortopedia en Hospital Ángeles Lindavista, CDMX."
+>
+  <Header />
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="eyebrow">Acerca de</div>
+        <h1>Dr. Daniel Ibarra Alva</h1>
+        <p class="role">Traumatología y Ortopedia</p>
+        <p class="intro">
+          Cirujano Ortopedista y Traumatólogo especializado en lesiones deportivas, artroscopia y reemplazo articular. Cédulas profesionales 11106113 y 14915067.
+        </p>
+      </div>
+    </section>
+
+    {secciones.map((s) => (
+      <section class="section" id={s.id}>
+        <div class="wrap">
+          <div class="eyebrow">{s.titulo}</div>
+          <ul class="timeline">
+            {s.items.map((i) => (
+              <li>
+                <span class="period">{i.periodo}</span>
+                <div>
+                  <h3>{'url' in i && i.url ? <a href={i.url} target="_blank" rel="noopener">{i.titulo}</a> : i.titulo}</h3>
+                  <p>{i.lugar}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    ))}
+
+    <section class="cta">
+      <div class="wrap">
+        <p>¿Quieres una valoración personalizada?</p>
+        <a href="/#agendar" class="btn">Agendar consulta</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero { background: var(--white); border-bottom: 1px solid var(--line); padding: 4rem 0 3.5rem; }
+  .page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.05; font-weight: 700; letter-spacing: -0.02em; }
+  .page-hero .role { margin-top: 1rem; font-size: 0.8rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--slate); font-weight: 600; }
+  .page-hero .intro { margin-top: 1.5rem; max-width: 640px; color: var(--slate); font-size: 1.05rem; line-height: 1.7; }
+
+  .timeline { list-style: none; display: grid; gap: 1rem; max-width: 820px; }
+  .timeline li { display: flex; gap: 1.4rem; align-items: flex-start; background: var(--white); border: 1px solid var(--line); border-left: 3px solid var(--navy); border-radius: 0.75rem; padding: 1.1rem 1.4rem; transition: box-shadow 0.2s, transform 0.2s; }
+  .timeline li:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .period { flex: none; min-width: 64px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; color: var(--navy-mid); padding-top: 0.15rem; }
+  .timeline h3 { font-size: 0.98rem; font-weight: 700; }
+  .timeline h3 a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  .timeline p { margin-top: 0.2rem; font-size: 0.86rem; color: var(--muted); }
+
+  .cta { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--white); padding: 3rem 0; text-align: center; }
+  .cta .wrap { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+  .cta p { font-size: 1.15rem; font-weight: 600; }
+  .cta .btn { background: var(--white); color: var(--navy); }
+  .cta .btn:hover { background: var(--panel); }
+</style>

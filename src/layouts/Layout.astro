@@ -63,7 +63,7 @@ const ogImage = new URL('/og-image.jpg', Astro.site ?? Astro.url);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: clip; -webkit-text-size-adjust: 100%; }
 
   body {
     font-family: 'Montserrat', sans-serif;
@@ -73,6 +73,14 @@ const ogImage = new URL('/og-image.jpg', Astro.site ?? Astro.url);
   }
 
   svg { display: block; }
+  img { max-width: 100%; }
+
+  @media (max-width: 600px) {
+    .section { padding: 3rem 0; }
+    .eyebrow { font-size: 0.75rem; letter-spacing: 0.22em; margin-bottom: 1.75rem; }
+    .eyebrow::before { width: 32px; }
+    .wrap { padding: 0 1.1rem; }
+  }
   .wrap { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
 
   .btn {

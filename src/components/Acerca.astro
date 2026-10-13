@@ -12,6 +12,7 @@
         <p>
           Consulta en Hospital Ángeles Lindavista, con atención personalizada y enfoque en la recuperación funcional.
         </p>
+        <p><a href="/acerca" class="more">Conocer más: formación, cursos y publicaciones →</a></p>
         <ul class="tags">
           <li>Lesiones deportivas</li>
           <li>Artroscopia</li>
@@ -38,6 +39,7 @@
   .acerca-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: stretch; }
   .acerca-text p { color: var(--slate); font-size: 0.98rem; line-height: 1.75; margin-bottom: 1.1rem; }
   .acerca-text .lead { font-size: 1.25rem; font-weight: 600; color: var(--navy); line-height: 1.5; padding-left: 1.1rem; border-left: 3px solid var(--navy); }
+  .acerca-text .more { color: var(--navy); font-weight: 700; font-size: 0.9rem; text-decoration: underline; text-underline-offset: 3px; }
   .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
   .tags li { padding: 0.45rem 1rem; border-radius: 2rem; background: var(--panel); color: var(--navy-mid); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.03em; transition: background 0.25s, color 0.25s, transform 0.25s; }
   .tags li:hover { background: var(--navy); color: var(--white); transform: translateY(-2px); }
@@ -55,6 +57,10 @@
   .btn-light:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.3); }
 
   @media (max-width: 860px) {
-    .acerca-grid { grid-template-columns: 1fr; }
+    .acerca-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  }
+  @media (max-width: 600px) {
+    .urgencias { padding: 1.75rem 1.4rem; }
+    .acerca-text .lead { font-size: 1.1rem; }
   }
 </style>
