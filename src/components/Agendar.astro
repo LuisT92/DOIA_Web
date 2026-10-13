@@ -58,6 +58,11 @@
 <style>
   .booking { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--white); padding: 4.5rem 1.5rem; clip-path: polygon(0 24px, 100% 0, 100% 100%, 0 100%); margin-top: -24px; }
   .booking-box { max-width: 620px; margin: 0 auto; }
+  @media (max-width: 600px) {
+    .booking { padding: 3.5rem 1.1rem; }
+    .privacy { padding: 1.5rem 1.25rem; }
+    .scheduler :global(.chip) { padding: 0.5rem 0.8rem; }
+  }
   .booking .eyebrow { color: #c3d0e0; justify-content: center; }
   .booking .eyebrow::before { background: #c3d0e0; }
 
@@ -330,7 +335,7 @@
     }
 
     if (reservado) {
-      const msg = `Hola, solicito confirmación de mi cita. Nombre: ${nombre} ${apellidos}, Fecha: ${fmtLong(cita.fecha)}, Hora: ${fmt12(cita.hora)}`;
+      const msg = `Hola Dr. Daniel Ibarra, solicite una cita. Soy ${nombre} ${apellidos}, el dia ${fmtLong(cita.fecha)}, a las ${fmt12(cita.hora)}, Gracias.`;
       const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
       if (wa) wa.location.href = url;
       else window.location.href = url;

@@ -1,10 +1,28 @@
+---
+const path = Astro.url.pathname.replace(/\/$/, '');
+const urgenciaMsg = 'Hola Dr. Ibarra, tengo una urgencia traumatológica y necesito atención. ¿Me puede apoyar?';
+const urgenciaUrl = `https://wa.me/525561555254?text=${encodeURIComponent(urgenciaMsg)}`;
+const links = [
+  { href: '/', label: 'Inicio' },
+  { href: '/acerca', label: 'Acerca de' },
+];
+---
 <header>
+  <div class="urgency">
+    <span class="urgency-text"><strong>¿Tienes una urgencia?</strong> Atención de urgencias de 7:00 a 12:00 h</span>
+    <a href={urgenciaUrl} target="_blank" rel="noopener" class="urgency-btn">Contáctame por WhatsApp</a>
+  </div>
   <div class="nav">
-    <div class="brand">
+    <a href="/" class="brand">
       <strong>Dr. Daniel Ibarra Alva</strong>
       <span>Traumatología y Ortopedia</span>
-    </div>
-    <a href="#agendar" class="btn">Agendar consulta</a>
+    </a>
+    <nav aria-label="Principal">
+      {links.map((l) => (
+        <a href={l.href} aria-current={path === (l.href === '/' ? '' : l.href) ? 'page' : undefined}>{l.label}</a>
+      ))}
+    </nav>
+    <a href="/#agendar" class="btn">Agendar consulta</a>
   </div>
 </header>
 
@@ -15,7 +33,24 @@
     border-bottom: 1px solid var(--line);
     position: sticky; top: 0; z-index: 100;
   }
-  .nav { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 1.5rem; max-width: 1160px; margin: 0 auto; }
+  .urgency { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 0.5rem 1rem; background: #c62828; color: var(--white); padding: 0.5rem 1.5rem; font-size: 0.82rem; }
+  .urgency-btn { background: var(--white); color: #c62828; text-decoration: none; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.04em; padding: 0.35rem 0.9rem; border-radius: 2rem; transition: transform 0.2s, box-shadow 0.2s; }
+  .urgency-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,0.3); }
+  .nav { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 0.9rem 1.5rem; max-width: 1160px; margin: 0 auto; }
+  .brand { text-decoration: none; color: inherit; }
   .brand strong { display: block; font-size: 1.05rem; font-weight: 700; letter-spacing: 0.02em; }
   .brand span { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  nav { display: flex; gap: 1.6rem; margin-left: auto; }
+  nav a { text-decoration: none; color: var(--slate); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; padding: 0.3rem 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  nav a:hover, nav a[aria-current] { color: var(--navy); border-color: var(--navy); }
+
+  @media (max-width: 640px) {
+    .urgency { font-size: 0.75rem; padding: 0.45rem 1rem; text-align: center; }
+    .brand span { display: none; }
+    .nav { padding: 0.7rem 1rem; gap: 0.75rem; }
+    .brand strong { font-size: 0.92rem; }
+    nav { gap: 0.9rem; }
+    nav a { font-size: 0.76rem; letter-spacing: 0.03em; }
+    .nav .btn { display: none; }
+  }
 </style>
