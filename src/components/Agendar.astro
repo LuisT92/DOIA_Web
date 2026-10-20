@@ -33,7 +33,7 @@
         </div>
         <label class="consent">
           <input type="checkbox" id="privacidad" required />
-          <span>Acepto el <a href="#privacidad-modal" id="openPrivacy">Aviso de Privacidad</a></span>
+          <span>Acepto el <a href="/privacidad" target="_blank" rel="noopener">Aviso de Privacidad</a></span>
         </label>
         <button type="submit" class="submit" disabled>Solicitar cita médica</button>
       </fieldset>
@@ -42,25 +42,11 @@
   </div>
 </section>
 
-<dialog id="privacidad-modal" class="privacy">
-  <button type="button" class="privacy-close" aria-label="Cerrar">×</button>
-  <h3>Aviso de Privacidad</h3>
-  <div class="privacy-body">
-    <p>El Dr. Daniel Ibarra Alva, con domicilio en Hospital Ángeles Lindavista, Consultorio 315, Río Bamba 639, Lindavista, Gustavo A. Madero, CDMX, es responsable del tratamiento de sus datos personales, de conformidad con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.</p>
-    <p><strong>Datos que recabamos:</strong> nombre completo, teléfono de contacto y fecha y horario de interés para su consulta.</p>
-    <p><strong>Finalidades:</strong> agendar y confirmar su cita médica, contactarlo por teléfono o WhatsApp y dar seguimiento a su solicitud de atención.</p>
-    <p><strong>Transferencias:</strong> sus datos no serán compartidos con terceros, salvo obligación legal o para las finalidades antes descritas. Se almacenan en herramientas de gestión de citas con medidas de seguridad razonables.</p>
-    <p><strong>Derechos ARCO:</strong> usted puede acceder, rectificar, cancelar u oponerse al tratamiento de sus datos, o revocar su consentimiento, enviando su solicitud por WhatsApp al 55 6155 5254 o directamente en el consultorio.</p>
-    <p>Al marcar la casilla y enviar el formulario, usted otorga su consentimiento para el tratamiento de sus datos conforme a este aviso. Cualquier cambio será publicado en este sitio web.</p>
-  </div>
-</dialog>
-
 <style>
   .booking { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--white); padding: 4.5rem 1.5rem; clip-path: polygon(0 24px, 100% 0, 100% 100%, 0 100%); margin-top: -24px; }
   .booking-box { max-width: 620px; margin: 0 auto; }
   @media (max-width: 600px) {
     .booking { padding: 3.5rem 1.1rem; }
-    .privacy { padding: 1.5rem 1.25rem; }
     .scheduler :global(.chip) { padding: 0.5rem 0.8rem; }
   }
   .booking .eyebrow { color: #c3d0e0; justify-content: center; }
@@ -111,12 +97,6 @@
   .consent { display: flex; align-items: flex-start; gap: 0.6rem; margin-top: 0.4rem; font-size: 0.85rem; color: #c3d0e0; cursor: pointer; }
   .consent input { margin-top: 0.25rem; width: 16px; height: 16px; accent-color: #4da3ff; flex: none; cursor: pointer; }
   .consent a { color: var(--white); font-weight: 600; text-decoration: underline; }
-  .privacy { border: 0; border-radius: 1rem; padding: 2rem; max-width: 600px; width: 92vw; max-height: 85vh; margin: auto; background: var(--white); color: var(--navy); box-shadow: 0 30px 60px rgba(0,0,0,0.5); position: fixed; }
-  .privacy::backdrop { background: rgba(15, 27, 45, 0.8); backdrop-filter: blur(4px); }
-  .privacy h3 { font-size: 1.15rem; margin-bottom: 1rem; padding-right: 2rem; }
-  .privacy-body { max-height: calc(85vh - 8rem); overflow-y: auto; padding-right: 0.5rem; }
-  .privacy-body p { font-size: 0.85rem; line-height: 1.65; color: var(--slate); margin-bottom: 0.8rem; }
-  .privacy-close { position: absolute; top: 0.8rem; right: 0.9rem; width: 34px; height: 34px; border-radius: 50%; border: 0; cursor: pointer; background: var(--panel); color: var(--navy); font-size: 1.4rem; line-height: 1; }
   .submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
   .form-status { display: none; margin-top: 1.2rem; padding: 0.9rem 1rem; border-radius: 0.5rem; font-size: 0.9rem; font-weight: 600; text-align: center; }
   .form-status.ok { display: block; background: rgba(37, 211, 102, 0.15); border: 1px solid rgba(37, 211, 102, 0.6); color: #b8f5d0; }
@@ -125,7 +105,7 @@
 
 <script>
   const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycby1VAGyKi_ZC1qAtcGaCy3DgH8rIavR_S5A3Vm-BOKnSKwVgQt6p22q2wIYaYoZkF_a/exec';
-  const WHATSAPP_NUMBER = '525561555254';
+  const WHATSAPP_NUMBER = '525553537719';
   const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   const DIAS = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
 
@@ -361,14 +341,6 @@
     submitBtn.textContent = originalText;
     enableForm(reservado ? false : selected !== null);
   });
-
-  const privacyDialog = $<HTMLDialogElement>('privacidad-modal');
-  $('openPrivacy').addEventListener('click', (e) => {
-    e.preventDefault();
-    privacyDialog.showModal();
-  });
-  privacyDialog.querySelector('.privacy-close')?.addEventListener('click', () => privacyDialog.close());
-  privacyDialog.addEventListener('click', (e) => { if (e.target === privacyDialog) privacyDialog.close(); });
 
   loadSlots();
 </script>

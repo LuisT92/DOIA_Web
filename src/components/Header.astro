@@ -4,7 +4,6 @@ const urgenciaMsg = 'Hola Dr. Ibarra, tengo una urgencia traumatológica y neces
 const urgenciaUrl = `https://wa.me/525561555254?text=${encodeURIComponent(urgenciaMsg)}`;
 const links = [
   { href: '/', label: 'Inicio' },
-  { href: '/acerca', label: 'Acerca de' },
 ];
 ---
 <header>
@@ -17,11 +16,13 @@ const links = [
       <strong>Dr. Daniel Ibarra Alva</strong>
       <span>Traumatología y Ortopedia</span>
     </a>
-    <nav aria-label="Principal">
-      {links.map((l) => (
-        <a href={l.href} aria-current={path === (l.href === '/' ? '' : l.href) ? 'page' : undefined}>{l.label}</a>
-      ))}
-    </nav>
+    {links.length > 1 ? (
+      <nav aria-label="Principal">
+        {links.map((l) => (
+          <a href={l.href} aria-current={path === (l.href === '/' ? '' : l.href) ? 'page' : undefined}>{l.label}</a>
+        ))}
+      </nav>
+    ) : <div class="spacer"></div>}
     <a href="/#agendar" class="btn">Agendar consulta</a>
   </div>
 </header>
@@ -40,6 +41,7 @@ const links = [
   .brand { text-decoration: none; color: inherit; }
   .brand strong { display: block; font-size: 1.05rem; font-weight: 700; letter-spacing: 0.02em; }
   .brand span { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .spacer { flex: 1; }
   nav { display: flex; gap: 1.6rem; margin-left: auto; }
   nav a { text-decoration: none; color: var(--slate); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; padding: 0.3rem 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
   nav a:hover, nav a[aria-current] { color: var(--navy); border-color: var(--navy); }
